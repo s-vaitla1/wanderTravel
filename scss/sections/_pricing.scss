@@ -1,0 +1,228 @@
+/// **** PRICING SPECIFIC TYPOGRAPHY **** ///
+$pricing-price-fs: (
+  x-large:   (4rem, 5.5rem),     //font size: 64px  line Height: 88px
+  large :    (3rem, 4rem),       //font size: 48px  line Height: 64px
+  medium:    (2.25rem, 3rem),    //font size: 36px  line Height: 48px
+  small:    (2.25rem, 3rem)    //font size: 36px  line Height: 48px
+)!default;
+
+$pricing-features-fs: (
+  x-large:   (2rem, 3rem),       //font size: 32px  line Height: 48px
+  large :    (1.4375rem, 2rem),  //font size: 23px  line Height: 32px
+  medium:    (1.25rem, 2rem),    //font size: 20px  line Height: 32px
+  small :    (1.25rem, 2rem)     //font size: 20px  line Height: 32px
+)!default;
+
+$pricing-card-title-fs: (
+  x-large:   (1.5rem, 2rem),       //font size: 24px  line Height: 32px
+  large :    (1.25rem, 2rem),       //font size: 20px  line Height: 32px
+  medium:    (1.125rem, 1.5rem),    //font size: 18px  line Height: 24px
+  small :    (1.125rem, 1.5rem),    //font size: 18px  line Height: 24px
+)!default;
+
+
+@mixin pricing($style) {
+    font-family: $font-family;
+    @if $style == "price--txt" {
+        font-weight: $fw-bold;
+        color: $body-main-color--w;
+        @include font-size($pricing-price-fs);
+    }
+  
+    @else if $style == "features--txt" {
+        font-weight: $fw-normal;
+        color: $body-main-color--w;
+        @include font-size($pricing-features-fs);
+      
+    }
+  
+    @else if $style == "card--title" {
+        font-weight: $fw-bold;
+        @include font-size($pricing-card-title-fs);
+    }
+  }
+
+// ===== Usage ===== //
+.pricing__price--txt{
+    @include pricing(price--txt);
+  }
+  
+  .pricing__features--txt{
+    @include pricing(features--txt);
+  }
+  
+  .pricing__card--title{
+    @include pricing(card--title);
+  }
+
+
+
+
+/// **** PRICING STYLES **** ///
+.pricing{
+    @include layout-container-fluid;
+    @include layout-spacing;
+
+    &__heading{
+        text-align: center;
+        padding-bottom: 4rem;
+    }
+
+    &__cards{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3.75rem;
+    }
+
+    &__card{
+        border-radius: .1875rem;
+        background-color: $pricing-card-bg-color;
+        padding-top: 1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-bottom: 3rem;
+        transition: all 0.3s ease;
+    }
+
+    &__card:hover{
+        transform: translateX(0rem) translateY(-2rem);  
+    }
+
+    &__card-img-container{
+        position: relative;
+    }
+
+    &__card-img{
+        width: 100%;  
+    }
+
+    &__card-title{
+        position: absolute;
+        width: 70%;
+        top: 95%;
+        left: 50%;
+        transform: translate(-50%, -95%);
+        border-radius: 50rem;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.7);
+        padding: .6rem 0rem;
+    }
+
+    &__price{
+        text-align: center;
+        padding: 1rem 0rem;
+    }
+
+    &__features {
+        text-align: center;
+        list-style: none;
+        margin: 0rem;
+        padding: 0rem;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 3rem;
+    }
+
+    &__feature {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    &__feature:first-child {
+        padding-top: 0rem;
+    }
+
+    &__btn-container{
+        @include flex-justify;
+    }
+
+    &__link{
+        padding-top: 4rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    &__link:hover{
+        color: $hover-active-color;
+        text-decoration: underline;
+    }
+
+    &__card:last-child{
+       height: 100%; 
+       display: none;
+    }
+
+    &__link--w{
+        color: white;
+        text-align: center;
+        
+        
+    }
+
+    &__btn-arrow--w{
+        color: white;
+        font-size: 5rem;
+    }
+
+    /// **** BELOW 1040PX **** ///
+    &__heading{
+        @include respond-to(md){
+            padding-bottom: 3rem;
+        }
+        
+    }
+
+    &__cards{
+        @include respond-to(md){
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    &__card:last-child{
+        @include respond-to(md){
+            @include flex-center(column);
+        }
+    }
+
+    &__link{
+        @include respond-to(md){
+            display: none;
+        }
+    }
+
+    /// **** BELOW 480PX **** ///
+    &__heading{
+        @include respond-to(xs){
+            padding-bottom: 2rem;
+        } 
+    }
+
+    &__cards{
+        @include respond-to(xs){
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    &__card:last-child{
+        @include respond-to(xs){
+            display: none;
+        }
+    }
+    &__card-title{
+        @include respond-to(xs){
+            width: 85%;
+            padding: .6rem .5rem;
+        }
+    }
+
+    &__link{
+        @include respond-to(xs){
+            display: block;
+            padding-top: 2rem;
+        }
+    }
+    
+}
+
