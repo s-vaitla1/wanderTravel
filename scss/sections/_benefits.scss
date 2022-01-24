@@ -1,0 +1,62 @@
+.benefits{
+    @include layout-spacing;
+    background-color: $benefits-bg-color;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    
+    &__container{
+        @include layout-container-fluid;
+    }
+
+    &__card{
+        border: 10px solid $border-color--w;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    &__card:hover{
+        background-color:$hover-active-color;
+        transform: translateX(0rem) translateY(-0.3rem);  
+    }
+
+    &__card:first-child {
+        margin-top: 0rem;
+    }
+
+    &__card:last-child {
+        margin-bottom: 0rem;
+    }
+
+    &__heading{
+        color: $heading-color--w;
+        padding-bottom: .5rem;
+    }
+
+    &__txt{
+        color: $body-main-color--w;
+    }
+
+    /// **** BELOW 768PX **** ///
+    &__card{
+        @include respond-to(sm){
+            border: 5px solid $border-color--w;
+            padding: 1rem;
+        }
+        
+    }
+
+    /// **** BELOW 480PX **** ///
+    &__card{
+        @include respond-to(xs){
+            padding: .5rem;
+        }
+        
+    }
+
+}
+
+
+
+  

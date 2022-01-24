@@ -1,0 +1,160 @@
+/// **** FONT VARIABLES **** ///
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+
+//Font family
+$font-family: 'Inter', sans-serif;
+
+//Font Weights
+$fw-light:           300;
+$fw-normal:          400;
+$fw-medium:          500;
+$fw-semi-bold:       600;
+$fw-bold:            700;
+$fw-xtra-bold:       800;
+$fw-black:           900;
+
+
+/// **** BASE FONT STYLES **** ///
+$font-size-breakpoints: (
+  x-large : 1920px,
+  large   : 1919px,
+  medium  : 768px, 
+  small   : 480px
+)!default;
+
+//FONT-SIZE MAPS [fs-map]
+$p-font-sizes: (
+  x-large:   (4.5rem, 6rem),     //font size: 72px  line Height: 96px
+  large :    (3rem, 4rem),       //font size: 48px  line Height: 64px
+  medium:    (1.875rem, 3rem),   //font size: 30px  line Height: 48px
+  small :    (1.125rem, 1.5rem), //font size: 18px  line Height: 24px
+)!default;
+
+$h1-font-sizes: (
+  x-large:   (8rem, 10.5rem),     //font size: 128px  line Height: 168px
+  large :    (6rem, 8rem),        //font size: 96px  line Height: 128px
+  medium:    (3.75rem, 5rem),     //font size: 60px  line Height: 80px
+  small :    (2.5rem, 3rem)       //font size: 40px  line Height: 64PX
+)!default;
+
+$h2-font-sizes: (
+  x-large :   (6.75rem, 9rem),       //font size: 108px  line Height: 144px
+  large :     (4rem, 5.5rem),         //font size: 64px  line Height: 88px
+  medium:     (2.25rem, 3rem),         //font size: 36px  line Height: 48px
+  small :     (1.5rem, 2rem),         //font size: 24px  line Height: 32px
+)!default;
+
+$h3-font-sizes: (
+  x-large :   (6.75rem, 9rem),       //font size: 108px  line Height: 144px
+  large :     (4rem, 5.5rem),         //font size: 64px  line Height: 88px
+  medium:     (2.25rem, 3rem),         //font size: 36px  line Height: 48px
+  small :     (1.5rem, 2rem),         //font size: 24px  line Height: 32px
+)!default;
+
+@mixin font-size($fs-map, $fs-breakpoints: $font-size-breakpoints) {
+  @each $key, $value in $fs-map { 
+      @if map-has-key($fs-breakpoints, $key){
+          $breakpoint: map-get($fs-breakpoints, $key);
+
+          @if $key == x-large { 
+              @media screen and (min-width: $breakpoint) {  
+                font-family: $font-family;
+                @include make-font-size($value);
+              }                              
+          }
+          @else {
+              @media screen and (max-width: $breakpoint) {  
+                font-family: $font-family;
+                @include make-font-size($value);
+              }
+          }
+      }
+ }
+
+}
+
+// Utility function for mixin font-size
+@mixin make-font-size($value) {
+  // If $value is a list, include both the font-size and line-height
+  @if type-of($value) == "list" {
+    font-size: nth($value, 1);
+    line-height: nth($value, 2)
+  }
+  @else {
+    font-size:$value;
+  }
+}
+
+// ===== Usage ===== //
+//@include font-size($p-font-sizes);
+//@include font-size($h1-font-sizes);
+//@include font-size($h2-font-sizes);
+
+/// **** HEADING FONT STYLES **** ///
+@mixin heading-base{
+  font-family: $font-family;
+  font-weight: $fw-black;
+  color: $heading-color;
+}
+
+@mixin heading($style) {
+    @if $style == "main" {
+        @include heading-base;
+        @include font-size($h1-font-sizes);
+    }
+
+    @else if $style == "sub" {
+        @include heading-base;
+        @include font-size($h2-font-sizes);
+    }
+}
+
+// ===== Usage ===== //
+.heading--primary{
+  @include heading(main);
+}
+.heading--secondary{
+  @include heading(sub);
+}
+
+
+/// **** BODY FONT STYLES **** ///
+@mixin body-base{
+  @include font-size($p-font-sizes);
+  font-family: $font-family;
+  color: $body-main-color;
+}
+
+@mixin body($style) {
+  @if $style == "main" {
+    @include body-base;
+    color: $body-main-color;
+  }
+  @else if $style == "bold" {
+    @include body-base;
+    font-weight:$fw-bold;
+    color: $body-main-color;
+  }
+}
+
+// ===== Usage ===== //
+.body--main{
+  @include body(main);
+}
+
+.body--bold{
+  @include body(bold);
+}
+
+
+
+
+//Utilities
+.bold{
+  font-weight: $fw-bold;
+}
+
+.underline{
+  text-decoration: underline;
+}
+

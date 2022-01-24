@@ -1,0 +1,107 @@
+/// **** BREAKPOINTS **** ///
+$breakpoints: (
+    xxs:  352px,
+    xs:   480px,
+    sm:   768px,
+    md:   1040px,
+    lg:   1919px,
+    xl:   1920px
+) !default;
+
+/// **** MEDIA QUERIES **** ///
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint);
+    @if $breakpoint == xl {
+      @media (min-width: $value) { 
+        @content; 
+      }
+    }
+    @else {
+      @media screen and (max-width: $value) {
+        @content;
+      }
+    }
+  }
+}
+
+// ===== Usage ===== //
+//@include respond-to(xxs){}
+//@include respond-to(xs){}
+//@include respond-to(sm){}
+//@include respond-to(md){}
+//@include respond-to(lg){}
+//@include respond-to(xl){}
+
+
+/// **** LAYOUT CONTAINER **** ///
+@mixin layout-container-fluid{
+  margin: 0 2rem;
+  max-width: 100%;
+  padding: 0rem 1rem 0rem 1rem;
+
+  @include respond-to(md){
+    margin: 0 1rem;
+    padding: 0rem 1rem 0rem 1rem;
+  }
+  @include respond-to(xs){
+      margin: 0 .5rem;
+      padding: 0rem .5rem 0rem .5rem;
+  }  
+
+}
+// ===== Usage ===== //
+//@include layout-container-fluid;
+
+
+/// **** LAYOUT SPACING **** ///
+@mixin layout-spacing{
+  margin-bottom: 11.5rem;
+
+  @include respond-to(lg){
+    margin-bottom: 9.5rem;
+  }
+
+  @include respond-to(md){
+    margin-bottom: 4rem;
+  }
+
+  @include respond-to(xs){
+    margin-bottom: 2rem;
+  }
+}
+
+// ===== Usage ===== //
+//@include layout-spacing;
+
+
+/// **** FLEX-BOX TOOLKIT **** ///
+@mixin flex($flex-direction: row, $flex-wrap: nowrap){
+  display: flex;
+  flex-direction: $flex-direction;
+  flex-wrap: $flex-wrap;
+}
+
+@mixin flex-center ($flex-direction: row) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: $flex-direction;
+}
+
+@mixin flex-align($align-items: center) {
+  display: flex;
+  align-items: $align-items;
+}
+
+@mixin flex-justify($justify-content: center) {
+  display: flex;
+  justify-content: $justify-content;
+}
+// ===== Usage ===== //
+//@include flex
+//@include flex-center
+//@include flex-align
+//@include flex-justify
+
+

@@ -1,0 +1,14 @@
+.hero{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    @include layout-spacing;
+    
+    &__img{
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    &__img:hover{
+        filter: sepia(77%);
+    }
+}

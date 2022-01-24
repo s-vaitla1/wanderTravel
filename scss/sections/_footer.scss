@@ -1,0 +1,81 @@
+/// **** NAVIGATION SPECIFIC TYPOGRAPHY **** ///
+$footer-font-sizes: (
+  x-large:   (6rem, 8rem),      //font size: 96px  line Height: 128px
+  large :    (3rem, 4rem),      //font size: 48px  line Height: 64px
+  medium:    (2.25rem, 3rem),   //font size: 36px  line Height: 48px
+  small :    (1rem, 2rem),   //font size: 20px  line Height: 32px
+)!default;
+
+@mixin footer-links{
+    font-family: $font-family;
+    font-weight: $fw-black;
+    color: $nav-link-color;
+    @include font-size($footer-font-sizes);
+}
+  
+
+/// **** FOOTER STYLES **** ///
+.footer{
+    @include footer-links;
+    background-color: $footer-bg-color;
+    color: $body-main-color--w;
+
+    &__container{
+        @include layout-container-fluid;
+        padding-bottom: 9.5rem;
+    }
+
+    &__logo{
+        width: 100%;
+        padding-bottom: 6.5rem;
+    }
+
+    &__nav{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        @include flex-justify(space-between);
+    }
+
+    &__nav-link{
+        transition: all 0.3s ease;
+    }
+
+    &__nav-link:hover{
+        text-decoration: underline;
+        color: $hover-active-color;
+    }
+
+    &__nav-link:active{
+        text-decoration: underline;
+        color: $hover-active-color;
+        transform: translateX(0rem) translateY(.225rem);
+    }
+
+    /// **** BELOW 1040PX **** ///
+    &__container{
+        @include respond-to(md){
+            padding-bottom: 3.5rem;
+        }
+    }
+
+    &__logo{
+        @include respond-to(md){
+            padding-bottom: 3.5rem;
+        }
+    }
+
+    /// **** BELOW 480PX **** ///
+    &__container{
+        @include respond-to(xs){
+            padding-bottom: 2rem;
+        }
+    }
+
+    &__logo{
+        @include respond-to(xs){
+            padding-bottom: 2rem;
+        }
+    }
+    
+}

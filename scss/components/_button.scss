@@ -1,0 +1,55 @@
+/// **** BUTTON SPECIFIC TYPOGRAPHY **** ///
+$button-font-sizes: (
+  x-large:   (2.5rem, 3.5rem),   //font size: 40px  line Height: 56px
+  large :    (2.25rem, 3rem),    //font size: 36px  line Height: 48px
+  medium:    (1.75rem, 2.5rem),  //font size: 28px  line Height: 40px
+  small:    (1.75rem, 2.5rem),  //font size: 28px  line Height: 40px
+)!default;
+
+@mixin button-txt{
+    font-family: $font-family;
+    font-weight: $fw-bold;
+    color: $body-main-color--w;;
+    @include font-size($button-font-sizes);
+}
+
+
+/// **** BUTTON STYLES **** ///
+@mixin button-base{
+    @include button-txt;
+    display: inline-block;
+    text-decoration:none;
+    border-radius: 100rem;
+    padding: 1.5rem 4rem;
+    text-align: center;
+    transition: all 0.3s ease;
+
+    /// **** BELOW 480PX **** ///
+    @include respond-to(xs){
+        padding: 1.3rem 3.4rem;
+    }
+            
+        
+}
+
+
+.button--primary{
+    @include button-base;
+    color:$button-primary-color;
+    background:$button-primary-bg-color;
+
+    &:hover {
+        color:$button-primary-bg-color;
+        background:darken($hover-active-color, 8%);
+        transform: translateX(0rem) translateY(-0.3125rem);
+    }
+
+    &:active {
+        color:$button-primary-bg-color;
+        background:darken($hover-active-color, 25%);
+        transform: translateX(0rem) translateY(.125rem);
+    } 
+}
+
+
+
